@@ -1,0 +1,32 @@
+Optional: add to portal-ext.properties:
+com.cogix.SurveyPortlet.ViewsFlashURL=https://my.domain.com:8888/ViewsFlash
+default is same domain and protocol as liferay, ie., ViewsFlash deployed as another app in same app server
+
+Using this option makes it possible to run ViewsFlash as a remote application in another server altoegether
+( I could use tomcat8514 !!! )
+
+Create ViewsFlash data source
+Put optional license key in /etc/cogix/viewsflash.properties
+
+# TBD Security options (single sso, vfadmin  vs  lry.jsp/encryptionkey)
+
+Deploy ViewsFlash.war file directly on app server
+
+ViewsFlash Liferay build:
+apiattribute=com.cogix.vwf.api
+lry.jsp
+In Tomcat8514, using VF8.properties
+
+
+Security options for no SSO:
+apiattribute=com.cogix.vwf.api
+lry.jsp
+do not protect vfadmin or vfuser in web.xml
+appsecurity=user
+
+Security options for SSO:
+Protect vfadmin and vfuser in web.xml
+Configure SSO somehow between the two apps
+appsecurity=user
+
+Be sure to review web.xml carefully, match it to VF8 / 8514.

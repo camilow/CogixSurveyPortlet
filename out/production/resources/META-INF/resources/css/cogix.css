@@ -1,0 +1,16 @@
+/*
+Cogix WYSIWYG HTML editor styles
+
+Styles in cogix.css are used by the WYSIWYG HTML editor,  wjere they are displayed in its Styles menu
+cogix.css is included in the Standard style
+
+If you modify this, save your modifications, as this style sheet can be upgraded by Cogix on any release
+See also Standard_.css for styles that are used with Matrix and Grid
+
+*/
+
+.Medium { font-size:11pt; }
+.SmallCap { font-variant:small-caps; font-size:11pt; }
+.Large { font-size:12pt; font-weight:bold;}
+
+

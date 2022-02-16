@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+    <display-name>ViewsFlash</display-name>
+    <description>Cogix ViewsFlash Survey Portlet</description>
+    <context-param>
+        <param-name>company_id</param-name>
+        <param-value>liferay.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>portalListenerClasses</param-name>
+        <param-value>com.liferay.portal.kernel.servlet.SerializableSessionAttributeListener,com.liferay.portal.kernel.servlet.PortletContextListener</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>httpHeaderSecurity</filter-name>
+        <filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
+        <init-param>
+            <param-name>antiClickJackingEnabled</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>Invoker Filter - ERROR</filter-name>
+        <filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
+        <init-param>
+            <param-name>dispatcher</param-name>
+            <param-value>ERROR</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>Invoker Filter - FORWARD</filter-name>
+        <filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
+        <init-param>
+            <param-name>dispatcher</param-name>
+            <param-value>FORWARD</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>Invoker Filter - INCLUDE</filter-name>
+        <filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
+        <init-param>
+            <param-name>dispatcher</param-name>
+            <param-value>INCLUDE</param-value>
+        </init-param>
+    </filter>

@@ -1,0 +1,549 @@
+[/ifportal,not][/notables]<!doctype html>
+<html  [/tagdir]  xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>[/polltitle]</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=[/charsetname]" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    [/comment]
+    <!--
+
+    Revised for Liferay 7 and single instance per page,
+    and avoiding minifier with cdata: http://stackoverflow.com/questions/3302648/should-i-use-cdata-in-html5
+
+        Revised July 2012
+        Implements automatic adjustments for iPad
+
+        Revised May 12 2010
+        Implements inline styles
+        Corrects right to left display in portals
+        Centers questionnaire in browser
+        Improves fieldset spacing
+        Includes cogix.css to bring in styles used by the WYSIWYG editor
+        Discontinued use of h4 and replaced with  div , to allow using h4 in WYSIWYG editor, and inistead of using formapramterdef,h4 uses  formparameterdef,qtext,
+        but kept it for backward compatibility with user-created styles that might use it.
+         Adds necessary JavaScript for supporting DisplayOrHide question style
+        Added vwf_ShowAndHide_HiddenQuestions to support DisplayOrHide and validation interactions
+
+        Revised June 2007
+        In portals, styles can be controlled from Place Settings page, including new option for arbitrary style properties
+        Adds more options to Place Settings
+
+    -->
+    [/endcomment][/endifportal][/ifportal]
+    <!-- ViewsFlashPortletPage=[/pagenumber]    Do not remove or modify this comment
+    -->
+    [/endifportal]
+    [/vwfstylelevel,2]
+    [/formparameterdef,div,class="cogix-section-body" ]
+    [/formparameterdef,qtext,class="cogix-section-body cogix-qtext" ]
+    [/formparameterdef,error,class="cogix-msg-alert inlineErrorPlaceholder" ]
+    [/formparameterdef,questionhelp,class="cogix-msg-success" ]
+    [/formparameterdef,button,class="cogix-form-button cogix-submitbuttons" ]
+    [/formparameterdef,inputfield,class="cogix-form-input-field" ]
+    [/formparameterdef,fieldset,class="cogix-fieldset" ]
+    [/formparameterdef,qhelp,class="qhelp"]
+    [/ifquestionhelp][/endifquestionhelp]
+    [/comment]
+    In portals these styles will not be generated in the <head> element. They work, nevertheless.
+    To move them to the head element, remove the #cogix[/xxxx] tags from each style.
+    [/endcomment]
+    <link rel="apple-touch-icon" href="[/webappname]/ViewsFlash/cogixapp.png" />
+    <link href="[/webappname]/styles/Standard_.css?v=[/jsversion]" rel="stylesheet" type="text/css" />
+    <link href="[/webappname]/styles/cogix.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+
+        #cogix[/allalphapollid] input[type="text"]{ font:inherit; border:1px solid; border-color:#AAAAAA;  -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:2px;}
+        #cogix[/allalphapollid] input[type="email"]{ font:inherit; border:1px solid; border-color:#AAAAAA;  -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:2px;}
+        #cogix[/allalphapollid] textarea { font:inherit; border:1px solid; border-color:#AAAAAA;  -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:2px; }
+        #cogix[/allalphapollid] select { font:inherit; border:1px solid; border-color:#AAAAAA;  -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:2px; }
+
+
+        #cogix[/allalphapollid] .cogix-section-body {
+                                    font-size:[/customt,10]pt;
+                                    color:#[/custome,000000];
+                                    font-family: [/customn,Verdana,Arial, Helvetica, sans-serif];
+                                    font-weight: normal;
+                                [/customg];
+                                }
+        [/comment]The following style must match .cogix-section-body:[/endcomment]
+        #cogix[/allalphapollid] .cogixgrid {
+                                    color:#[/custome,000000];
+                                    font-family: [/customn,Verdana,Arial, Helvetica, sans-serif];
+                                    font-weight: normal;
+                                [/customg];
+                                }
+        #cogix[/allalphapollid] .cogix-qtext {
+                                    margin-bottom:4px;
+                                    margin-top:1px;
+                                    font-weight:inherit;
+                                    text-align:left;
+                                }
+        #cogix[/allalphapollid] .cogix-fieldset {
+                                    border-style:[/customc,none];
+                                    border-width:1px;
+                                    border-color:#DDDDDD;
+                                    margin: 2px 0px 2px 0px;
+                                    padding: 6px 6px 6px 6px;
+                                }
+        #cogix[/allalphapollid] .cogix-msg-alert {
+                                    color:#FF0000;
+                                    font-weight: bold;
+                                    font-family: [/customn,Verdana,Arial, Helvetica, sans-serif];
+                                }
+        #cogix[/allalphapollid] .cogix-msg-success {
+                                    cursor:pointer;
+                                    color:#00CC33;
+                                    font-weight: normal;
+                                    font-family: [/customn,Verdana,Arial, Helvetica, sans-serif];
+                                }
+        #cogix[/allalphapollid] .qhelp {
+                                    font-style:italic;
+                                    display:none;
+                                    padding:5px;
+                                }
+        #cogix[/allalphapollid] .qerror {
+                                    display:none;
+                                }
+        #cogix[/allalphapollid] .inlineError{
+                                    color:#FF0000;
+                                    display:block;
+                                    font-weight:bold;
+                                }
+        #cogix[/allalphapollid] .inlineErrorPlaceholder {
+                                    /* do not remove this style */
+                                }
+        #cogix[/allalphapollid] .summaryErrorPlaceholder {
+                                    display:none;
+                                }
+        #cogix[/allalphapollid] .elementError {
+                                    border:1px solid #FF0000;
+                                    background-color: #FFFF99;
+                                    padding:0;  /* for liferay, without this makes elements bigger  */
+                                    background-image:none; /* for liferay, without this it doesn't display the yellow background */
+                                    font-size:inherit;
+                                }
+        #cogix[/allalphapollid] .elementError:checked { background-color:black; }
+
+        #cogix[/allalphapollid] .multicolumninputfield {
+                                    display:inline;
+                                    float:left;
+                                    margin-right:6px; /* for liferay */
+                                }
+        #cogix[/allalphapollid] .cogix-form-input-field {
+                                    color:#[/custome,000000];
+                                    font-family: [/customn,Verdana,Arial, Helvetica, sans-serif];
+                                    font-weight: normal;
+                                [/customg];
+                                    padding: 1pt;
+                                }
+        #cogix[/allalphapollid] .cogix-form-button {}
+        #cogix[/allalphapollid] .reader {
+                                    display:none;
+                                }
+        #cogix[/allalphapollid] input:focus, textarea:focus {
+                                    background-color:#FFFFBB;
+                                    color:#000000;
+                                }
+        #cogix[/allalphapollid] input:focus, textarea:focus {
+                                    background-color:#FFFFBB;
+                                    color:#000000;
+                                }
+        #cogix[/allalphapollid] input {
+                                    /* background:none;   for liferay in IE*/
+                                }
+        #cogix[/allalphapollid] .cogix-control-label {
+                                    width:auto;
+                                    float:none;
+                                }
+
+        @media screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)
+        { #cogix[/allalphapollid] .cogix-section-body , #cogix[/allalphapollid] .cogix-form-button { font-size:[/customd,15]pt; } .Medium, .SmallCap, .Large { font-size:[/customd,15].9pt;  }  }
+        @media screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)
+        { #cogix[/allalphapollid] .cogix-section-body , #cogix[/allalphapollid] .cogix-form-button { font-size:[/customd,15].5pt; } .Medium, .SmallCap, .Large { font-size:[/customd,15].9pt;  } }
+        @media screen and (max-device-width: 480px) and (orientation:portrait)
+        { #cogix[/allalphapollid] .cogix-section-body , #cogix[/allalphapollid] .cogix-form-button { font-size:[/customd,15].8pt; } .Medium, .SmallCap, .Large { font-size:[/customd,15].9pt;  }  }
+        @media screen and (max-device-width: 480px) and (orientation:landscape)
+        { #cogix[/allalphapollid] .cogix-section-body , #cogix[/allalphapollid] .cogix-form-button { font-size:[/customd,15].9; } .Medium, .SmallCap, .Large { font-size:[/customd,15].9pt;  }  }
+    </style>
+    <script type="text/JavaScript" src="[/webappname]/js/Standard2_.js?jsversion=[/jsversion]" ></script>
+    <script>[/ifportal]//<![CDATA[[/endifportal]
+		var options$form[/allalphapollid] = new Object();
+		options$form[/allalphapollid] .methodology='[/inlinevalidation]'; // Set to 'inline' to force displaying validation error messages inline, or set to 'alert' to force legacy behavior with alert dialogs
+
+		if ( typeof ValidatorArray  == 'undefined' )
+			ValidatorArray = new Array (); // holds validation statements to be evaluated in OnSubmit
+		if ( typeof ValidatorArrayProperties  == 'undefined' )
+			ValidatorArrayProperties = new Array();
+		ValidatorArrayProperties.ValidatorSuppress = false;  // if true, skip onSubmit validation
+
+		// Formerly in Calculate; now a single instance rather than multiple instances
+		if ( typeof CalculatorArray_vwf  == 'undefined' )
+			CalculatorArray_vwf = new Array();
+		if ( typeof Calculate_defaultformat_vwf  == 'undefined' )
+			Calculate_defaultformat_vwf = "";
+
+		// Formerly in DisplayOrHide; now a single instance rather than multiple instances
+		if ( typeof ShowAndHide_Specs  == 'undefined' )
+			ShowAndHide_Specs = new Object ();
+
+		if ( typeof ShowAndHide_SavedHandler  == 'undefined' )
+			ShowAndHide_SavedHandler = new Object ();
+
+		if ( typeof ShowAndHide_HiddenQuestions  == 'undefined' )
+			ShowAndHide_HiddenQuestions = new Object ();
+
+		if ( typeof vwfEventsListObject  == 'undefined' )
+			vwfEventsListObject = new vwfEventsList (); //  defined in Standard_.js
+
+
+		var i18nArray = new Array ();   //  hold translated strings; addressed as i18nArray('msgid');
+		i18nArray['requiredanswer'] = "[/lookupi18n,requiredanswer]";
+		i18nArray['entervaluebetween'] = "[/lookupi18n,entervaluebetween2]";
+		i18nArray['entervaluenogreater'] = "[/lookupi18n,entervaluenogreater2]";
+		i18nArray['entervaluenoless'] = "[/lookupi18n,entervaluenoless2]";
+		i18nArray['checknumbermsg'] = "[/lookupi18n,checknumbermsg]";
+		i18nArray['checknumerictextmsg'] = "[/lookupi18n,checknumerictextmsg]";
+		i18nArray['checkvaliddatemsg'] = "[/lookupi18n,checkvaliddatemsg]";
+		i18nArray['checkemailmsg'] = "[/lookupi18n,checkemailmsg]";
+		i18nArray['checkvalidemailmsg1'] = "[/lookupi18n,checkvalidemailmsg1]";
+		i18nArray['checkvalidemailmsg2'] = "[/lookupi18n,checkvalidemailmsg2]";
+		i18nArray['checkvalidemailmsg3'] = "[/lookupi18n,checkvalidemailmsg3]";
+		i18nArray['checkvalidemailmsg4'] = "[/lookupi18n,checkvalidemailmsg4]";
+		i18nArray['checkvalidemailmsg5'] = "[/lookupi18n,checkvalidemailmsg5]";
+		i18nArray['checkvalidemailmsg6'] = "[/lookupi18n,checkvalidemailmsg6]";
+		i18nArray['checkvalidemailmsg7'] = "[/lookupi18n,checkvalidemailmsg7]";
+		i18nArray['presence'] = "[/lookupi18n,presence]";
+		i18nArray['correcterrors'] = "[/lookupi18n,correcterrors]";
+		if ( 'correcterrors'==i18nArray['correcterrors'] )
+			i18nArray['correcterrors']="Please correct the following error(s)";
+
+		[/geterrormapasjs]
+
+		function onSubmit[/allalphapollid](theform, theformname) {
+			return vwfOnSubmit(theform, theformname);
+		}
+
+		function qhelper[/allalphapollid](d) {
+			return vwfQhelper(d);   //  located in Standard_.js
+		}
+
+		function qlengthchecker[/allalphapollid](a,b) {
+			return vwfQlengthchecker(a,b);  //  located in Standard_.js
+		}
+
+    [/ifportal]//--><!]]>[/endifportal]</script>
+
+    [/ifportal,not]
+</head>
+<body  style="opacity:0; -webkit-transition-property: opacity; -webkit-transition-duration: 1s;" onload="document.body.style.opacity=1"  >
+[/endifportal]
+<div [/tagdir] >
+<div id="cogix[/allalphapollid]" style="width:[/customa,700]px;margin-left:auto;margin-right:auto;[/customo];">
+    <div id="divheaderimage[/allalphapollid]">
+        <img id="headerimage[/allalphapollid]" src="[/webappname]/viewsflash/nop.gif" alt="[/customf]" />
+    </div>
+    <script type="text/JavaScript">
+		<!--
+		if ( "" != "[/headerimage]" ) {
+			var imgelmt = document.getElementById("headerimage[/allalphapollid]");
+			imgelmt.src="[/headerimage]";
+		}
+		else {
+			var imgelmt2 = document.getElementById("headerimage[/allalphapollid]");
+			imgelmt2.style.display='none';
+		}
+		// -->
+    </script>
+    <div id="cogixheader[/allalphapollid]" [/formparameter,div]>[/pollheader]</div>
+<div id="cogixinner[/allalphapollid]" [/formparameter,div]>
+[/ifportal,not]
+<form method="post" name="form[/allalphapollid]" id="form[/allalphapollid]" action="[/vwfservlet]" onsubmit ="return onSubmit[/allalphapollid](this, 'form[/allalphapollid]')" novalidate="novalidate" >
+    [/endifportal]
+    <span id="vwfrequireddataiconsetting" style="display:none;">[/requireddataiconsetting]</span>
+    <div id="[/allalphapollid]-form-error" class="summaryErrorPlaceholder">
+        <span id="[/allalphapollid]-form-errormsg">Please correct the following errors</span>
+
+        <ul> <!--xx--><li style="display:none"></li> </ul></div>
+    <div class="cogix-msg-alert">[/statusmsg] </div>
+    [/allquestions][/ltext][/printablepagebreak]<div  id="vwf[/allalphapollid][/qnamejs]">[/qnumbering][/qno][/endqnumbering] [/requireddataicon][/qtext][/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]
+</div>[/endltext][/radio]
+    <script type="text/javascript">
+		<!--
+		ValidatorArray [ ValidatorArray.length ] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label>[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    [/allanswers]
+    <div><input id="[/qname]--[/answerno]" type="radio" name="[/qname]" value="[/avalue]" [/xchecked] [/vfonclick]onclick="vfRadio[/ifother]Other[/endifother](this.form,'[/qname]',false,'')"[/endvfonclick] /><label for="[/qname]--[/answerno]">&nbsp;[/atext]</label></div>
+    [/endallanswers][/ifnone]<div>
+    <input id="[/qname]-none" type="radio" name="[/qname]" value=""
+           [/vfonclick]onclick="vfRadio[/ifother]Other[/endifother](this.form,'[/qname]',false,'')"[/endvfonclick]
+    /><label for="[/qname]-none">&nbsp;[/nonetext]</label>&nbsp;</div>[/endifnone][/ifother]<div>
+    <input id="[/qname]-other" type="radio" name="[/qname]" value="" [/xotherchecked] /><label for="[/qname]-other">&nbsp;[/other]</label>&nbsp;<label for="[/qname]-othertext" class="reader">[/otherinput]</label>
+    <input [/formparameter,inputfield] id="[/qname]-othertext" type="text" name="[/qname]" size="[/twidth]" maxlength="[/tmaxsz]" value="[/otheranswer]" [/vfonclick] onchange="vfRadioOther(this.form,'[/qname]',true,'')" [/endvfonclick] />
+</div>[/endifother]
+    </fieldset>
+    [/endradio][/radio,2]
+    <script type="text/javascript">
+		<!--
+		ValidatorArray [ ValidatorArray.length ] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label>[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    <div>[/allanswers]<div class="multicolumninputfield"><input id="[/qname]--[/answerno]" type="radio" name="[/qname]" value="[/avalue]" [/xchecked] [/vfonclick]onclick="vfRadio[/ifother]Other[/endifother](this.form,'[/qname]',false,'')"[/endvfonclick] /><label for="[/qname]--[/answerno]">&nbsp;[/atext]</label></div>
+        [/endallanswers][/ifnone]&nbsp;
+        <input id="[/qname]-none" type="radio" name="[/qname]" value=""
+               [/vfonclick]onclick="vfRadio[/ifother]Other[/endifother](this.form,'[/qname]',false,'')"[/endvfonclick]
+        /><label for="[/qname]-none">&nbsp;[/nonetext]</label>&nbsp;[/endifnone][/ifother]<div class="multicolumninputfield">
+            <input id="[/qname]-other" type="radio" name="[/qname]" value="" [/xotherchecked] /><label for="[/qname]-other">&nbsp;[/other]</label>&nbsp;<label for="[/qname]-othertext" class="reader">[/otherinput]</label>
+            <input [/formparameter,inputfield] id="[/qname]-othertext" type="text" name="[/qname]" size="[/twidth]" maxlength="[/tmaxsz]" value="[/otheranswer]" [/vfonclick] onchange="vfRadioOther(this.form,'[/qname]',true,'')" [/endvfonclick] />
+        </div>[/endifother]</div>
+    </fieldset>
+    [/endradio][/checkbox]
+    <script type="text/javascript">
+		<!--
+		ValidatorArray [ ValidatorArray.length ] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label>[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    [/allanswers]<div><input id="[/qname]--[/answerno]" type="checkbox" name="[/qname]" value="[/avalue]" [/xchecked] /><label for="[/qname]--[/answerno]">&nbsp;[/atext]</label></div>
+    [/endallanswers][/ifother]<div>
+    <input id="[/qname]-other" type="checkbox" name="[/qname]" value="" [/xotherchecked] /><label for="[/qname]-other">&nbsp;[/other]</label>&nbsp;<label for="[/qname]-othertext" class="reader">[/otherinput]</label>
+    <input  [/formparameter,inputfield] id="[/qname]-othertext" type="text" name="[/qname]" size="[/twidth]" maxlength="[/tmaxsz]" value="[/otheranswer]" /></div>
+    [/endifother]
+    </fieldset>
+    [/endcheckbox][/checkbox,2]
+    <script type="text/javascript">
+		<!--
+		ValidatorArray [ ValidatorArray.length ] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label>[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    <div>[/allanswers]<div class="multicolumninputfield">
+        <input id="[/qname]--[/answerno]" type="checkbox" name="[/qname]" value="[/avalue]" [/xchecked] /><label for="[/qname]--[/answerno]">&nbsp;[/atext]</label></div>
+        [/endallanswers]
+        [/ifother]<div class="multicolumninputfield">
+            <input id="[/qname]-other" type="checkbox" name="[/qname]" value="" [/xotherchecked] /><label for="[/qname]-other">&nbsp;[/other]</label>&nbsp;<label for="[/qname]-othertext" class="reader">[/otherinput]</label>
+            <input  [/formparameter,inputfield] id="[/qname]-othertext" type="text" name="[/qname]" size="[/twidth]" maxlength="[/tmaxsz]" value="[/otheranswer]" />
+        </div>[/endifother]</div>
+    </fieldset>
+    [/endcheckbox][/menu]
+    <script type="text/javascript">
+		<!--
+		ValidatorArray [ ValidatorArray.length ] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label for="[/qname]" >[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    <select id="[/qname]" name="[/qname]">
+        <option value="">[/showchoice]</option>
+        [/allanswers]
+        <option value="[/avalue]" [/xselected] >[/atext]</option>[/endallanswers]
+    </select><br />
+    </fieldset>
+    [/endmenu][/text]
+    <script type="text/javascript">
+		<!--
+		var checkexpression[/qnamejs] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		ValidatorArray [ ValidatorArray.length ] = checkexpression[/qnamejs];
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label for="[/qname]">[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    <input [/formparameter,inputfield] id="[/qname]" type="text" name="[/qname]" value="[/origanswer]" size="[/twidth]" maxlength="[/tmaxsz]"  />
+    </fieldset>
+    [/endtext][/mtext]
+    <script type="text/javascript">
+		<!--
+		ValidatorArray [ ValidatorArray.length ] = "checkQuestionAnswered(document.forms['form[/allalphapollid]'].elements['[/qname]'],' [/questionmustbeanswered]','[/valuelow]','[/valuehigh]','[/valuetype]')";
+		//      -->
+    </script>
+    <fieldset [/formparameter,fieldset] id="vwf[/allalphapollid][/qnamejs]">
+    <div  [/formparameter,qtext] ><span [/formparameter,error]>[/dataerror]</span>[/qnumbering][/qno][/endqnumbering] <label for="[/qname]">[/requireddataicon][/qtext]</label>[/ifqhelp]<span [/formparameter,questionhelp] onclick="qhelper[/allalphapollid]('vwfqhb[/allalphapollid][/qnamejs]');">&nbsp;[/qhelpmarker]</span>
+    <span [/formparameter,qhelp] id="vwfqhb[/allalphapollid][/qnamejs]" >[/qhelp]</span>[/endifqhelp]</div>
+    <textarea [/formparameter,inputfield] id="[/qname]" name="[/qname]" cols="[/tacols]" rows="[/tarows]"
+    onkeyup="if ( qlengthchecker[/allalphapollid] != null ) qlengthchecker[/allalphapollid](this,'[/tmaxsz]');">[/origanswerintextarea]</textarea><br />
+    </fieldset>
+    [/endmtext][/hidden]<div   id="vwf[/allalphapollid][/qnamejs]" style="display:none"><input type="hidden" id="[/qname]" name="[/qname]" value="[/origanswer]" /></div>[/endhidden][/action]
+    [/actionhtml][/endaction][/pagebreak,preview]
+    <div style="height:20px"><hr style="width:100%; vertical-align:middle; background:#999999; height: 1px" title="Page break" /></div>[/endpagebreak][/endallquestions]
+    [/ifsubmitting]<div style="margin:10px;" id="cogixsubmitbuttons[/allalphapollid]">
+    <div style="float:left;">
+        [/ifpage,submit,last] <input id="cogixbuttonsubmit[/allalphapollid]"  [/formparameter,button] type="submit" name="submitsubmit" value="[/texttag,Submit]" />[/endifpage]
+        [/ifpage,next,last,not] <input id="cogixbuttonnext[/allalphapollid]" [/formparameter,button] type="submit" name="submitnext" value="[/texttag,Next]" />[/endifpage]
+        [/ifpage,save] <input id="cogixbuttonsave[/allalphapollid]" [/formparameter,button] type="submit" name="submitsave" value="[/texttag,Save]" onclick="ValidatorArrayProperties.ValidatorSuppress=true;this.waspressed=true;" />[/endifpage]
+        [/ifpage,previous,first,not]<input id="cogixbuttonprev[/allalphapollid]" [/formparameter,button] type="submit" name="submitprev" value="[/texttag,Previous]" onclick="ValidatorArrayProperties.ValidatorSuppress=true;this.waspressed=true;" />[/endifpage]
+    </div>
+    <div id="cogix-progress-footprints" class="cogix-progress-footprints" style="display:none;">
+        <img src="[/webappname]/images/REPeriod.gif" alt="form submitted"/>
+    </div>
+    [/ifmultipage]
+    <div style="display:[/customk,inherit]; margin: 5px 0 0 0; clear:both; padding-top:5px;" >
+        <progress class="ProgressBar" max="100" value="[/percentcomplete]">
+            <div style="height: 12px;  width: 100px;  background: #FFFFFF; border-radius:3px;  border: 1px solid silver;  font-size:1px;  padding: 0; margin-bottom:5px;">
+                <div style="width:[/percentcomplete]%; float:left;  height: 8px;  margin: 2px;  padding: 0;  font-size:1px; background: #CEEFFF;">
+                </div></div>
+            [/percentcomplete]%&nbsp;[/lookupi18n,complete]
+        </progress> </div>
+    [/endifmultipage]
+</div>
+    [/endifsubmitting]
+    <div>
+        [/ifportal,not]<input type="hidden" name="cmd" value="[/cmd]" />[/endifportal]
+        <input type="hidden" name="pollid" value="[/pollname]" />
+        <input type="hidden" name="vwf_showquestion" id="vwf_showquestion" />
+        <input type="hidden" name="results" value="[/results]" />
+        <input type="hidden" name="pagenumber" value="[/pagenumber]" />
+        <input type="hidden" name="charset" value="[/charsetname]" />
+        <input type="hidden" name="vwfaction" id="vwfaction" />
+        <input type="hidden" id="vwf_ShowAndHide_HiddenQuestions" name="vwf_ShowAndHide_HiddenQuestions" value="" />[/ifqueryauthentication]
+        [/ifpage,submit,first,not]<input type="hidden" name="[/authenticateduserquestion]" value="[/authenticateduserid]" />[/endifpage]
+        <input type="hidden" name="vwfqueryauthenticateduserid" id="vwfqueryauthenticateduserid" value="[/authenticateduserid]" />[/endifqueryauthentication]
+    </div>
+    [/ifportal,not]</form>[/endifportal]
+</div>
+<div id="cogixfooter[/allalphapollid]" [/formparameter,div]>[/pollfooter]</div>
+</div></div>
+<script>//<![CDATA[
+if ( typeof Cogix_Print_Adjustments != 'undefined' )
+    Cogix_Print_Adjustments ( document.getElementById ('cogix[/allalphapollid]') );
+
+[/ifviewall,not]
+if ( typeof ShowAndHide_Specs != 'undefined' && ShowAndHide_Specs != null && typeof ShowAndHide_CheckQuestionsExist != 'undefined' ) {
+    ShowAndHide_CheckQuestionsExist ();
+}[/endifviewall]
+[/ifdisableall]
+CogixDisableAll ();
+[/endifdisableall]
+//--><!]]></script>
+[/ifportal,not]
+</body>
+</html>
+[/endifportal]
+<vwf=pollform><vwf=endpollform><vwf=spotform>
+<input id="state1" type="hidden" name="state1" value="[/state1]">
+<a href="javascript:toggleAppearance()">Appearance</a>
+<table cellpadding="1" style="margin-top:3px">
+    <tr><td class="settingsbox" id="pollsettings" style="display:none">
+        <table border="0" cellspacing="2" cellpadding="0">
+            <tr>
+                <td colspan="3" nowrap>Questionnaire properties</td>
+            </tr>
+            <tr>
+                <td width="110" nowrap>Width</td>
+                <td colspan="2">
+                    <input type="text" name="customa" value="[/customa,700]" size="6">    </td>
+            </tr>
+            <tr>
+                <td nowrap>Others, <br>
+                    such as&nbsp;&nbsp;<br></td>
+                <td nowrap colspan="2" ><input type="text" name="customo" value="[/customo,]" size="45">
+                    <br>
+                    border:solid thin #777777; padding:3px;<br></td>
+            </tr>
+            <tr>
+                <th colspan="3" nowrap>&nbsp;</th>
+            </tr>
+            <tr>
+                <td colspan="3" nowrap>Text properties</td>
+            </tr>
+            <tr>
+                <td nowrap>Font size in points</td>
+                <td colspan="2" nowrap>
+                    <input type="text" name="customt" value="[/customt,10]" size="6">
+                    Font
+                    <input type="text" name="customn" value="[/customn,Verdana,Arial, Helvetica, sans-serif]" size="35">    </td>
+            </tr>
+            <tr>
+                <td nowrap>Tablet Font Size in points</td>
+                <td colspan="2" nowrap>
+                    <input type="text" name="customb" value="[/customd,15]" size="6">
+            </tr>
+            <tr>
+                <td nowrap>
+                    Color    </td>
+                <td >
+                    <input type="text" name="custome" value="[/custome,000000]" size="6">
+                    &nbsp;&nbsp;</td>
+                <td width="107" align="center" ><span style="font-size:[/customt,10]pt;font-family:[/customn,Verdana,Arial, Helvetica, sans-serif];color:#[/custome,000000];[/customg];">Text example</span></td>
+            </tr>
+            <tr>
+                <td nowrap>Others
+                    such as&nbsp;&nbsp;</td>
+                <td colspan="2"><input type="text" name="customg" value="[/customg,]" size="45">
+                    <br>            font-variant:small-caps;font-weight:bold;</td>
+            </tr>
+            <tr>
+                <th colspan="3" nowrap>&nbsp;</th>
+            </tr>
+            <tr>
+                <td nowrap>Progress bar</td>
+                <td colspan="2">
+                    <input type="radio" name="customk" value="inherit" > yes
+                    <input type="radio" name="customk" value="none"  > no    </td>
+            </tr>
+            <tr>
+                <td nowrap>Question border</td>
+                <td colspan="2">
+                    <input type="radio" name="customc" value="solid" > yes
+                    <input type="radio" name="customc" value="none"  > no       </td>
+            </tr>
+            <tr>
+                <td>Header image url</td>
+                <td colspan="2">
+                    <input type="text" name="headerimage" value="[/headerimage]" size="45">    </td>
+            </tr>
+            <tr>
+                <td >Image alt text</td>
+                <td colspan="2">
+                    <input type="text" name="customf" value="[/customf,]" size="45">    </td>
+            </tr>
+        </table>
+    </td></tr></table>
+<script type="text/JavaScript">
+
+	if ( "none" == "[/customk,inherit]" ) {
+		document.forms[0].customk[1].checked = true;
+	} else {
+		document.forms[0].customk[0].checked = true
+	}
+
+	if ( "none" == "[/customc,none]" ) {
+		document.forms[0].customc[1].checked = true;
+	} else {
+		document.forms[0].customc[0].checked = true;
+	}
+
+
+	showAppearance();
+
+	function toggleAppearance() {
+		var state1 = document.getElementById("state1");
+		state1.value = "true" == state1.value ? "false" : "true";
+		showAppearance();
+	}
+
+	function showAppearance(){
+		var state1 = document.getElementById("state1");
+		var Standard_Appearance = "true" == state1.value;
+
+		//   document.getElementById('pollsettings').style.display = document.getElementById('pollsettings').style.display == 'none' ? '' : 'none';
+		document.getElementById('pollsettings').style.display = Standard_Appearance ? '' : 'none';
+	}
+</script>
+<vwf=endspotform>

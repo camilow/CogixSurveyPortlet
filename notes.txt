@@ -1,0 +1,672 @@
+To ed palmer, chicago
+We were recently testing ViewsFlash 10 with Liferay 7.4,
+and sure enough the war file that works with Liferay 7.1
+no longer works because of changed portlet.kernel jar f
+iles and the new version controls in Liferay.
+Note that project on mini uses portal-kernel 3.0,
+m1 uses portal-kernel 4.0, and this should be reflected
+in different MANIFESTS inside their jars
+
+  com.liferay.portal.kernel;version="[3.0.0,*)",\
+  com.liferay.portal.kernel;version="latest.release",\
+  com.liferay.portal.kernel;version="[3.0.0",\
+  com.liferay.portal.kernel;version="default",\
+
+
+So build process:
+In VF6, Rebuild project, ant l7portlet
+In CogixSurveyPortlet in arena, rebuild project, cd CogixSurveyPortlet ./gradlew build
+In VF6, rebuild project, ant war,  ant liferay7war
+puts stuff in release/liferay7
+
+http://localhost:8080/ViewsFlash/servlet/vfadmin?lry-op=vfadmin&
+lry-userid=egrJC0ekOeDhvz9X8VpZww%3D%3D&
+cmd=dfpoll&filledout=force&pollid=Examples!car_purchase&
+lry-bz=3512&
+lry-t=15553703761
+
+BUG: viewresults adjust urls
+-TODO use new viewresults method
+-TODO add new way of getting properties from environment as well as portal properties
+
+
+After deploying jart and viewsflash, use + Widgets / Survey  - Survey
+
+Deleted ViewsFlash app from 7.1 using App Manager, but VF jar still there
+I'm leaving it alone
+
+Deploying VF jar 1.0.1 using Aop Manager upload
+From liferay7
+/Users/camilowilson/liferay7/arena/Cogixsuerpverpoportlet/build/libs
+
+Hmm. ViewsFlash had ended up in Bundle Blacklist, which I set toits
+default configuraiton. That removed it from blacklist.properties as well !
+https://aspiresoftware.in/blog/blacklisting-osgi-modules-and-components-liferay-7/
+
+BUG Hmmmm. it's looking for 8383
+BUG SurveyPortlet.xml is using UCalculate2_.js
+AHA Defined in annotations inside SurveyPortlet.java.
+Maybe go back to Calculate2.js !!! Can't too dangeous
+Ok, so calculate will be wrong ( but wouldnt see it on shared db! )
+
+==>>
+- newliferaywar is building a good war, needs to pack it with the portlet as well
+- Portlet needs to be rebuilt with correct UCalculate3 in SurveyPortlet #component
+and remove obsolete ones
+- Redeploying war to see if it makes it through authentication
+- Need to rebuild portlet as .0.4 and redeploy in Apps/ Deploy and see
+if it replaces previous versino automatically; if not, how do we upgrade
+a portlet???
+AND IT IS WORKING !!!!!
+BTW, can I just use another browser ? No, it's counting on a session
+established by lry.jsp !
+
+
+So next, turn on debugger  (conf already written)
+and try to debug lry.jsp and see why it is quitting so quickly.
+Or put debugging stmts in it if NG
+OK! problem was that vf props had adage and portlet did not. Blank config page.
+NOW, problem is that VF is j2ee protected, and it shouldn't be!
+Somehow I ended up with wrong war file deployed to arena...
+YIKES ! ant build has lost 168 and liferay 6 and vignette !!!
+Build is just plain bad - pickus up wrong webxml somehow
+and perhaps doesn't pick up other things !
+
+
+
+Looks like the blacklisting happened when I uninstalled it !
+And when I unblacklisted it, it reinstalled it (1.0.1),
+and there it is!
+OK, next I build the liferay 7 war in VF.
+OOPS has hard coded 1.0.0.jar in ant liferay7 !!! Fixed, now 1.0.1
+Sepaate viewsflash.war and viewsflash0-1.0.0.jar are in release directory,
+but zip file has wrong jar
+
+Debuggin: standalone.conf
+Added -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5555
+so...
+   JAVA_OPTS="-Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5555"
+
+BAD README - says VF9
+
+WHAT HAPPENS TO SURVEY PORTLET? Is tht the ViewsFlash I see in bnd.bnd?
+
+
+This isthe deployment log
+Mac-mini:logs camilowilson$ tail -f liferay.2019-03-01.log
+
+
+See doc.txt for defnitive configuration answers
+Using vf8 weird version of VF8 in tomcat8514:8888!
+Key thing there is lry.jsp
+
+Local test deploy: blade deploy, debug with IJ.
+
+Build only:
+IJ Telnet:
+cd /Users/camilowilson/liferay7/arena/CogixSurveyPortlet
+./gradlew build (not clean)
+Writes to bild/libs/ViewsFlash-1.0.1.jar
+?? blade gw assemble
+
+creates build/libs/com.cogix.SurfveyPortlet-1.0.0.jar
+Deploy in liferay 7.1 with
+Cannot blade deploy to remote server; might work to drop .jar into deploy, needs testing.
+
+
+
+portlet needs to disable <link href  and
+<script type="text/JavaScript" src="
+
+
+
+
+
+two combos:
+One for js
+http://localhost:8080/combo?browserId=other&minifierType=&themeId=classic_WAR_classictheme&languageId=en_US&b=7002&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FStandard_html_.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FXUStandard2_.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FUCalculate2_.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FXUDisplayOrHide2_.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FCalendarPopup.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FDynamicDropDownUnobf.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FUReadOnly.js&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fjs%2FURequired2_.js&t=1494318142000
+One for css
+http://localhost:8080/combo?browserId=other&minifierType=&themeId=classic_WAR_classictheme&languageId=en_US&b=7002&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fcss%2FStandard_.css&com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn:%2Fcss%2Fcogix.css&com_liferay_product_navigation_product_menu_web_portlet_ProductMenuPortlet:%2Fcss%2Fmain.css&t=1494318142000
+
+===============
+Liferay 7:
+DELETE FROM PORTLETPREFERENCES WHERE PORTLETPREFERENCESID=40874
+INSERT INTO PORTLETPREFERENCES VALUES(61,40874,20116,0,3,20150,'com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJThn','<portlet-preferences><preference><name>pollname</name><value>upload</value></preference><preference><name>pollresultslink</name><value>checked</value></preference><preference><name>pollmsg</name><value>Take me!</value></preference><preference><name>pollembedorlink</name><value>link</value></preference><preference><name>favoriteColor</name><value></value></preference><preference><name>spotname</name><value>Practice</value></preference><preference><name>pollresultsaftercompleting</name><value>displaylinktoresults</value></preference><preference><name>uselocale</name><value>checked</value></preference></portlet-preferences>')
+
+Liferay 6:
+
+DELETE FROM PORTLETPREFERENCES WHERE PORTLETPREFERENCESID=21216
+INSERT INTO PORTLETPREFERENCES VALUES(21216,0,3,20520,'Survey_WAR_ViewsFlash_INSTANCE_5FeKPrdRzQYo','<portlet-preferences><preference><name>pollname</name><value>car_satisfaction2</value></preference><preference><name>pollresultslink</name><value>checked</value></preference><preference><name>pollmsg</name><value></value></preference><preference><name>pollembedorlink</name><value>embed</value></preference><preference><name>spotname</name><value>Examples</value></preference><preference><name>pollresultsaftercompleting</name><value>checked</value></preference><preference><name>uselocale</name><value>checked</value></preference></portlet-preferences>')
+==============
+Portlet Preferences migration:
+Liferay 6 in mysql portlet.preferences:
+                Survey_WAR_ViewsFlash_INSTANCE_5FeKPrdRzQYo
+In Liferay 7,
+                com_cogix_SurveyPortlet_INSTANCE_NLkep5dfJTh
+
+Theoretically, can change
+update portletpreferences
+set portletId=replace (portletId,'Survey_WAR_ViewsFlash_INSTANCE_','com_cogix_SurveyPortlet_INSTANCE_')
+where portletId like ('Survey_WAR_ViewsFlash_INSTANCE_%')
+So this could be done at portlet initialization time.
+
+BUT the portlet references on pages have also changed... How can I change them too?
+Well, table 'layout', column typeSettings like Survey_WAR_ViewsFlash_INSTANCE_  has a corresponding key:
+
+column-1=Survey_WAR_ViewsFlash_INSTANCE_5FeKPrdRzQYo,3
+column-2=19,
+layout-template-id=2_columns_ii
+
+Could also use Where Is My Portlet app  https://web.liferay.com/it/marketplace/-/mp/application/27156990
+column plid is page layout id in layout table... ???
+
+So put the attribute in portal-ext.properties, and it works.
+It wil work without the attributes altogeter, as well, and use some default thing.
+User Ids are encrypted. Best way would be to use https so nobody can snoop on the key.
+
+---------------------------------- remaining todo's
+Final debugging:
+
+ i.e., how does one upgrade?
+ BUG:  ViewsFlash Portlet name, and upgradeable portlet name?
+
+So how do I test upgrade?
+So the process is:
+https://dev.liferay.com/discover/deployment/-/knowledge_base/7-0/upgrading-to-liferay-7#gogo-shell-commands-for-module-upgrades
+
+- install lry7, don't start it;
+- run dbupgrade tool in lry7... (that's where I am now); requires mysql 5.7 with utf8
+
+  Try dbupgrade again - failed because interrupted the last time.
+  So back to lry 6, without DB, export to my 5.7, shutdown,  make copy of db,
+  try upgrade again. It worked  and left lry stopped.
+  There is no ViewsFlash on the new server.
+  On the new server, need to hook it up to the DB before starting,
+  with portal-ext properties! and remove the no0indexing thing
+
+    + Initial virgin deployment; can I do diagnose-1 etc through the portlet,
+    with appsecurity=user? I can test with nodb=true -- works!
+
+    + BUG ... default settings are all wrong. Need to put in the war file the
+      data files from the portal build !!! done.
+
+
+
+    Ok, the portal comes up with the lry6 data in the database, upgraded,
+    and the two VF portlet instances say This portlet has been undeployed.
+    So next steps:
+    - Do these 3 at the outset, before starting
+    + add mysql drivers to tomcat  lib
+    + add context.xml with vf datasource to tomcat conf
+      Stopped lry7 tomcat here so they'll take effect on restart
+    + upgrade vf props - need to put in apiattribute=com.cogix.vwf.api and
+      com.cogix.surveyportlet.adage=A passphrase
+
+      If deploying VF on a remote server, add URL param to portal-ext.properties !
+
+    - get new war, pointing to vf props, ready ( compare with lry 6 first )
+    Restarted lry7 at this point, didn't need to bring it down if do setup first
+    - deploy new war
+    - deploy new portlet
+    - portlets shouldnow work ... !!!
+
+
+    - Test setup security with pass prhase in vf props and liferay wp-ext.props
+    - Test remote deployment by removing VF from local liferay 7,
+      adding param to portalext, using a liferay VF that is pointing to that DB
+
+      So, use VF on mac mini, with different context, after deploying latest
+      final war to it
+      Cotext s/b Liferay 6, which is using local store for liferay anyway
+      Interesting ... it is pointing to everis already, just like my liferay 7...
+      (But it was using old war!)
+      Best to leave that one alone, so that it doesn't disturb VF...
+      Ok, so where else can I deploy the VF7 war ( incompatible Default!Default is the problem,
+      I think)
+      So give me a baby tomcat 8 on macmini
+      Here: http://10.1.10.14:8088/ViewsFlash
+      Note that because I specify the web app name, it allows multiple web apps side by side !
+
+
+      <Resource name="ViewsFlash" auth="Container" type="javax.sql.DataSource"
+       maxActive="100" maxIdle="30" maxWait="10000"
+                factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+       username="cogix" password="cogix123" driverClassName="com.mysql.jdbc.Driver"
+       url="jdbc:mysql://10.1.10.133:3306/everis?useUnicode=true&amp;autoReconnect=true"
+      />
+
+      com.cogix.SurveyPortlet.ViewsFlashURL=https://my.domain.com/ViewsFlash
+
+    Created tomcat8 on macmini, port 8088. Everyone's looking at everis !
+    So remove Vf from lry 7, add param above to it, deploy VF with that b
+    on 8181
+          com.cogix.SurveyPortlet.ViewsFlashURL=http://mini.cogix.com:8088/ViewsFlash
+
+http://mini.cogix.com:8088/ViewsFlash/servlet/vfadmin?cmd=dfspot&spotname=Examples
+
+And ready to rest it on localhost 8080 !!! booting now
+debug on 63558
+
+Doc for sdk  is in ~/T7 tomcat
+
+
+
+asdfasdf
+
+
+
+
+- Deploy lry6 portlet on new, clean lry6, or perhaps in existing one on mini.cogix.com
+- Try option 1:
+  Upgrade lry to lry 7
+  uninstall ViewsFlash app
+  deploy VF web app
+  deploy ViewsFlash portlet
+  See if portlets are pointing to same surveys.
+  Let's try that. Configuring portlets as follows:
+  Page 2 Practice!portletauth_many_save embedded, show "alreadycompated" message, no view results
+  Page 1 Practice!qauth, show take survey and view results
+
+Remember that the liferay war points to a different properties file... should it?
+Changed it, now points to vf props
+
+
+So... llry upgrade is:
+unzip lry7, run dbupgrade tool which writes properties and does some upgrade procedures
+- possibly deploy new vflry 7 jar file now ?
+
+put new vflry7 war in /webapps
+Stop old server?
+Start new server and do upgrade procedures?
+If I havent deployed VF war or jar, do so now
+All s/b ok
+
+Eh gads... Had to install mysql 5.7 ( > 5.5 ) on mac mini. root / cogix123.
+Created schema liferay6. Now need toimport the sql file I created before from sql 5.5
+into thisnew mysql.  Then I connect liferay 7 via dbupgrade thing, modified,
+this this db server. Hopefully upgrade will work this time...
+
+
+
+
+
+
+
+ So upgrade procedure is: after upgrading liferay to liferay 7, remove old VF portlet,
+ then deploy new portlet.  Conceivable that I could even just upgrade the portlet !!!
+ copy vf prooperties to new default: etc/cogix/ViewsFlashLiferay7.properties
+ And add security elements to it
+ - encryption phrase
+ - remote server url
+
+
+
+
+
+
+------------------------- end remaining todos
++ Test: put a different survey in the Others page. take them both at the same time.
++ What about weare you? Yes, it's good.
++ It was including /ViewsFlash/styles !!!!!!!!!
+
++   Ancient VF6 bug, leaving unfixed:
+    But this is worrisome - question numeric 4:
+    All characters must be numeric.
+    * Two decimal places, comma-separated, range from 5,07 to 6,99
+    5,08
+
+    And this: twodecplaces between
+    All characters must be numeric.
+    * Enter a number between 2.99 and 5.99.
+    3,00
+
+    The problem could be validation!!!
+    Holy shit... ancient bug. If using Number, with , as decimal point,
+    and enter a validation range ( regardless of format ), get All Characters must be numeric.
+
+
++ Bug: In expanded mode (take survey) was running examples in expanded mode (perhaps).
+  Changed defaults to test/allcs01;
+  When I submit that form, it displays examples, but preferences show test/allcs, and results in wrong pollid.
+
++ Bug: change spot , click on setup, not pointing to valid thing, get not setup message
+
++ Change underlying survey while it is in progress- ok, it keeps using the pollid
+  of the form!
+
+
++Need to find comprehensive tests of all styles in VF9 testbed
++ test!allclientside and moreclientside
++ test!all_styles and __fr and __ar
+
++ Retest 4 options and everything with auth=auto; using all_styles and i18n!
+
++ french works, not sure - no french text in the form or response
+
+BARF cant create user with default ar!!!
+
++ picked examples carsartcnaction, and pollid is !satisfaction , missing Exam;ples spotname!
+  I picked Examples, then later on chose the pollname...
+
++ Take survey  wasn't loading up i18nArray, etc.. Fixed by updating Standard so that JS is at the bottom
+
++  2 calendard windows gives cannot read property styule of null
+  in PopupWindow_hidePopup !!! Same fix as above
++ on dupe, don't show continue link
+
++ Not a but VF9 bug in examples 3 - 1st matrix:  12345 at the top are not centered , because they have a width < the td width!
+Which is because definition calls for table width 550, 1st column 200, 5 columsn@50each, total 450, not 550!
+When table width is corrected to 450, they all center perfectly.
+
++ Done  needs testing  TODO: Need to updata portletpreferences and layout tables during init, and test upgrade
+
++ test Bug  in lry.jsp: if using api, and cmd line includes userid=xxx,
+  it's a hack - kill the request.
+
+
++ Bug in VF9: view invite list in excel shouldn't include <link>
+
+Perfect with Tom - two surveys, one with i18n, showed them just right,
+and nothing available after that!
+
+- The only possible "bug" would be that practice/upload, which has language versions,
+shows the English title in the list, when it could show the spanish title;
+how would it do that? By adding language=fr to mysurveys api
+
+Tests:
++ i18n - use Practice!upload , ok including viewresults and tallies
++ rotate automatically
++ show eligible
+  Need three surveys with ivitaino lists
+  Create practice / HR, OPS, MGMT. Need
+
+So practice  upload with peter and tom; i18n; multiple submissions allowed
+and practice portletauthonce with joe and tom, no i18n, single submissino allowed
+
+Ok, retest results in i18n. First try in vf
+Users: peter is french, lucy is chinese, tom is sspanish, joebloggs is enlgish
+
+
+i18n test with practice!upload:
+Lucy, chinese, took it in english, view results in english, all good.
+Why not saving Champions??? It is.... report was old!
+
++ fixed in vf9, need to port jarover BUG: Taking it as tom in spanish - err msgs and portlet messagges in spanish,
+BUt buttons are in English !!!
+BECAUSE bug in VF9: when creating copies, texttag, defined in General page,
+is COPIED (its defaultvalue seems ok?)
+So, when creaing an i18n version __xx, I should NOT copy texttags and should
+prepopulate with i18n tags instead !!!
+Few people use these, but ... !
+
+
+
+VF9 build changes:
++ Standard_.html
++ Add lry.jsp (compare with mac mini); move master to VF9
++ XUStandard2.js simplified setstyleattrbitures
+? VF9 Build Standard2_js needs revised setstyleattributes from xustandard2_js from portlet
+
+-VF Bug: if templates.properties calls for x.html ,and that is not present, it doesn't say anything
+(and says updating x.html, but update fails)
+Happened with Standard_ .html ( extra blank)
++ Standard_.css
+
+Ok, changes to build.xml:
+new target surveyportlet
++ Adds lry.jsp
++ uses different web.xml, with etc/cogix/ViewsFlashLiferay7.properties
+
+------------------------
+
+stpoaneme ** is showalleligible
+pollname * is rotate automatically, at 457
+SurveyConfig status=open
+But surveycontent uses status=current
+GetLocalized is doing status=open
+
+
+- Showalleligible is a different jsp! A reasonably simple one, could be done.
+It depends on an API that is not in the web services yet, but easy enough to do.
+With that, it gets a list of pollids and titles ( from ActiveQuestionnaire objects )
+and constructs links; each link seets SURVEYPORTLETTAKING parameter to the pollid.
+Looks like we can junk pretty much the old way.
+Use the not used api command in getElebigle surveys cmdgetmysurveys&userid=xxx,
+which returns pollid?title\t   and it can populate the list.
+This parameter needs to be examined in doView and used for the pollid instead of anthing else, if present.
+The submission is enough to change TRACKING. The original query selects for surveyprogress of 1 or 2
+and when submitted becomes 3 or perhaps is removed altogether. In either case it disappears from tracking.
+
+Launch mysql on caligula:
+sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+
+
+Test Embedded and all other mode combinations of messages
+Test Dupe! and 4 options
+Test Save!
+
+
+
+Poretlet preferences migration - key on what? portletID
+System.out.println("ID : " + themeDisplay.getPortletDisplay().getId());
+
+System.out.println("InstanceID: " + themeDisplay.getPortletDisplay().getInstanceId());
+
+System.out.println("Portlet Name: " + themeDisplay.getPortletDisplay().getPortletName());
+
+
+
+Perhaps use the Porlet project to build the liferay 7 shippoable  version,
+ which is a zip with the VF9 war file unmodified ( after making these changes to its mainline )
+ plus the portlet jar file
+
+
+---------------------------------------------
+
+EH GADS -- unless I change the js properties in build,
+the generated JS is cached to  an old version !!!
+Same problem with CSS !!!
+
+Save seems to work nicely with Portal auth
+YES , for data entry forms,  use portlet auth and allow multiple submissions!
+
+
+
+http://mini.cogix.com:8080/ViewsFlash/lry.jsp?lry-op=viewsflash&xcmd=page&pollid=Practice!portletauth_once&lry-userid=test&lry-time=1493504556483&com.cogix.vwf.isportal=true&charset=UTF-8&submittedpollid=Practice!portletauth_once&txt=my text&vwf_showquestion=&pollid=Practice!portletauth_once&vwfaction=&submitnext=Next&vwf_ShowAndHide_HiddenQuestions=&results=Practice!portletauth_once.results.html&pagenumber=0
+lry-op=viewsflash&cmd=page&pollid=Practice!portletauth_once&lry-userid=test&lry-time=1493514343128&com.cogix.vwf.isportal=true&charset=UTF-8&submittedpollid=Practice%21portletauth_once&txt=afd&vwf_showquestion=&pollid=Practice%21portletauth_once&vwfaction=&submitnext=Next&vwf_ShowAndHide_HiddenQuestions=&results=Practice%21portletauth_once.results.html&pagenumber=0
+
+Remote server Security: see doc.txt, and SurveyPortlet.java for misc encryption stuff TBD later
+(encrypt entire query string when sending to lry.jsp)
+
+- done BTW to include <link, css, etc, need to do this:
+https://itsliferay.blogspot.com/2017/03/include-static-resources-liferaydxp.html
+
+
+Interesting migration guide
+https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/modularizing-an-existing-portlet
+
+Database is here:
+/Users/camilowilson/liferay7/liferay-ce-portal-7.0-ga3/data/hypersonic
+Do a tail-f on lportal.log
+
+=============== leftovers =================
+
+Configuration info (for 6?) here
+http://proliferay.com/liferay-portlet-configuration-page/
+
+trying to follow this:
+https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/making-your-applications-configurable
+Goes hand in hand with
+https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/implementing-configuration-actions
+which seems like the better tutorial (other one references ExampleConfig, which exists only here)
+
+Actual code. Need to include lry.jsp in liferay VF war build:
+    // For APi commands:
+    lry.jsp?lry-op=vfapi&lry-userid=useridencypted&cmd=getspotnames&....
+    // For showing the admin UI:
+    lry.jsp?lry-op=vfadmin&lry-userid=same&cmd=dfpublish&pollid=Examples!Service...
+    // For showing a survey; userid is optional
+    lry.jsp?lry-op=viewsflash&lry-userid=same&cmd=dfpublish&pollid=Examples!Service...
+
+Base64encoder under Java 8:
+http://stackoverflow.com/questions/36578625/base64encoder-is-internal-api-and-may-be-removed-in-future-release
+
+Liferay database may be here:
+/Users/camilowilson/liferay7/liferay-ce-portal-7.0-ga3/data/hypersonic
+No hope for preserving properties on an upgrade.
+INSERT INTO PORTLETPREFERENCES VALUES(5,34772,20116,0,3,20150,'com_cogix_feo_portlet_FeoPortlet_INSTANCE_BKVfqZ8JcPGy','<portlet-preferences><preference><name>favoriteColor</name><value>blue</value></preference></portlet-preferences>')
+
+
+ Here's how to migrate and keep old preferences !
+ Portlename may be are key (Survey? SurveyPortletLiferay?)
+
+ It claims that the Configuration object knows about properties, but it doesn't
+ https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/transitioning-from-portlet-preferences-to-the-configuration-api
+
+----------
+osgi
+powerpoint, some detail
+https://www.slideshare.net/mfrancis/http-whiteboard-osgi-compendium-60-how-web-apps-should-have-been-r-auge
+
+
+overview - fluff
+http://www.azilen.com/blog/osgi-modularity-liferay-exhibits-better-programming-scopes-developers/
+
+Some practical migration stuff, maybe
+https://www.slideshare.net/DidoJ/migration-of-exisiting-web-applications-to-osgi-at-eclipse-summit-europe-2010
+
+relevant to wabs conversion:
+https://docs.liferay.com/ce/portal/7.0-latest/propertiesdoc/portal.properties.html#Module%20Framework%20Web%20Application%20Bundles
+
+Will attempt to deploy the war that I tried to use for wabs:
+---
+Bug:  3431I communications failure excetion message is lost and subsequent message
+reads table checking failed
+
+
+05/23/17 13:57:31:768 	3431I	Table Exists check failed: VWFLOG
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 92,458,686 milliseconds ago.  The last packet sent successfully to the server was 3 milliseconds ago.
+05/23/17 13:57:31:768 	7914I	CREATE TABLE  VWFLOG  ( ROW_ORDINAL INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT , LOGSYSDATE TIMESTAMP, LOGDATE CHAR (8) , LOGTIME CHAR (12) , LOGINSTANCE INTEGER , SPOTNAME CHAR (32) , POLLNAME CHAR (32) , MSGID    CHAR (6) , MSGSEVERITY    CHAR (1) , MSG TEXT )
+05/23/17 13:57:31:841 	007E	 Table checking failed: Checking table VWFLOG com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'vwflog' already existscom.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'vwflog' already exists
+05/23/17 13:57:31:925 	115II	ViewsFlash servlet destroyed
+MacBook-Air:tomcat-8.0.32 camilowilson$ ping 10.1.10.133
+
+Interesting, with old war file in wab form:
+http://localhost:8080/o/ViewsFlash/js/Standard2_.js
+So it is delivering resources, but a weird URL... could work with this.
+BUT it is not delivering /o/ViewsFlash/servlet/viewsflash
+
+++++++++++
+
+OMG! Vaadinosgiservlet works at http://me.cogix.com:8080/o/VF/sevlet/viewsflash?cm=x.html
+AND this works too: this.getPortletContext().getRequestDispatcher ("//o/VF/sevlet/viewsflash");
+
+AND this is working:
+http://me.cogix.com:8080/o/csp/css/cogix.css
+
+That's because bnd.bnd has
+Web-ContextPath:/csp
+
+So, if I'm going to do this, I need:
+bnd.bnd path: /ViewsFlash
+The ViewsFlash stuff goes into META-INF/resources; I have collisions or duplicates
+on /js, need to resolve (if duplicates, hurray!)
+
+To include viewsflash.jar and others, do like I did with cogix.jar.:
+libs go in /libs directory;
+
+build.gradle says compile files(libs/cogix.jar);
+ in the resulting jar file they are in /lib.   Go figure!
+
+So i would write a  servlet that extends viewsflash, with annotations like Vaadin,
+        "osgi.http.whiteboard.servlet.name=ViewsFlash",
+        "osgi.http.whiteboard.servlet.pattern=/ViewsFlash/sevlet/viewsflash/*",
+
+And do the same thing with vfadmin
+
+So put js files and css files in different directory in portlet and change build
+Write new include that uses include instead !
+Test by coying vf.jar by hand first
+Init method?!
+
+
+So a new build for vf9:
+copy jar files
+
+In vadding: config.getServletContext ().getContextPath () is /o
+In survey portlet: this.getServletContext ().getContextPath () is /o/ViewsFlash !!!
+
+Can't get beyond com.sun.image.codec.jpg... ( perhaps if I edited the MF file?)
+OMG - see Import-Package statement in bnd.bnd, removed bad reference and now it loads!
+BUT - that removes all other import references... and nothing is visible to the app, eg java.servlet.
+
+See Bundle Headers Reference here
+https://www.osgi.org/bundle-headers-reference/
+
+Ok, giving up on this ( there will be more of this later on!)
+Although I guess I could patch the MF file after building it and try to deploy it?
+Ok, let me try that...
+
+Ok, so it's totally broken right nowm but reverting back to 48 hours ago would put it
+back in business with separately deployed war file.
+
+Do the .wabs thing one more time. Create /ViewsFlash/servlet/viewsflash and vfamin servlet
+wrappers that tap into viewsflash (two different classes?) would be much better with just one!
+which will appear at ....  or perhaps /ViewsFlash/servlet/viewsflash?
+Not clear how they will be included... But this does deploy them.
+So how do we test this?  The current production liferay build is liferay deploy ready.
+It needs to add the new servlet, which can be removed from the
+
+BTW I remember reading that the wab tool requires version 3 of web xml?
+Try that first?
+The build for liferay7 is related to this project ( independent war file for VF )
+
+----
+
++   Going back to VF war file deployment. Note that in bnd.bnd, 1st two lines could be ViewsFlash,
+    perhaps that would ease with migration...
+    Bundle-SymbolicName: ViewsFlash
+    Bundle-Name: ViewsFlash
+    Done.
+
++ Use new encryption in ne Belize
+
++ with renamed portlet, what about the preferences keys for the table?
+  Well, by setting the name in both portlet and config action, I may have succeeded -
+  it is using the same name !!!
+
+
+
+
+
+
+
+
+
+---------   BAD STUFF, obsolete, ****  Liferay  -------
+
+Trying to put servelt stuff into vf6's war   WATCH OUT!
+Creates viewsflash.xml ... so I would need toremove it from web.xml ?!
+Ok, now are tinkering with viewsflash.jaava and Portaal/web.xml !!!
+
+I could do servlet/vfadmin as a new servlet which includes viewsflashservletviewsflash!
+Ok, tried removing it from web.xml; succeeded at deploying /o/ViewsFlash,
+but the servletURL insisted on a 404. There's probably a way to do it
+using Felix:
+http://felix.apache.org/documentation/subprojects/apache-felix-http-service.html
+
+Ok, giving up.   Restore viewsflash.java .
+Liferay war didn't change, thanks to osgiweb.xml
+
+Its likely that if the servlet was just called /servlet/viewsflash, with no app name,
+it might work (if i declare url accordingly, or declare webapp as o
+Probable conflict between ViewsFlash app and ViewsFlash/servlet/viewsflash
+Well, it kind of did; but then /o/ViewsFlash/css/cogix.css killed it internally,
+who know why.  Couldn't retrieve css any more and servlet died with 404.
+Ok, it's a bug inside liferay.   Too much. STOP.
+
+
+
+

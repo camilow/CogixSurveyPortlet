@@ -1,0 +1,164 @@
+/*
+Cogix styles. If you modify this, save your modifications, as this style sheet can be upgraded by Cogix on any release
+See /ViewsFlash/cogix.css for additional styles, which are used by the HTML editor
+*/
+
+/* Used by Matrices */
+
+table.matrix {
+    border-width: 1px;
+    border-style: outset;
+    border-color: gray;
+    border-collapse: collapse;
+    empty-cells:show;
+}
+table.matrix th {
+    border-width: 1px;
+    padding: 2px;
+    border-style: inset;
+    border-color: gray;
+    font-weight:normal;
+    text-align:left;
+}
+table.matrix td {
+    border-width: 1px 0 1px 0;
+    padding: 2px;
+    border-style: inset;
+    border-color: lightgray;
+}
+table.matrix td:nth-child(n+2) {
+    text-align:center;
+}
+
+/* legacy  matrix style */
+table.cogixmatrix {
+	border-width: 1px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: collapse;
+    empty-cells:show;
+}
+table.cogixmatrix th {
+	border-width: 1px;
+	padding: 2px;
+	border-style: inset;
+	border-color: gray;
+     font-weight:normal;
+     text-align:left;
+}
+table.cogixmatrix td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: inset;
+	border-color: gray;
+}
+
+table.matrix td.first {text-align: left;  padding-left: 5px; border-right:1px solid lightgray;}
+table.matrix td {border-color:lightgray;}
+table.matrix tr.labelsrow td {vertical-align:middle;}
+table.matrix td.qualtdleft { border-right:1px solid lightgray;}
+table.matrix td.qualtdcenter { border-right:1px solid lightgray;}
+table.matrix td.quallb { border-left:1px solid lightgray;}
+table.matrix td.qualrb { border-right:1px solid lightgray;}
+table.matrix td.qualtdlabels { padding: 2px 1px 2px 1px; }
+table.matrix td.tdclick {}
+table.matrix label.big {display:block;}
+table.matrix tr.qualqrow {}
+.visibleinreport { display:none; }
+
+/* Used by Grid */
+table.cogixgrid {
+    border-width: 0px 1px 1px 0px;
+    border-spacing: 0;
+    border-style: outset outset outset outset;
+    border-color: gray gray gray gray;
+    background-color: white;
+    empty-cells:show;
+    border-collapse:collapse;
+}
+
+table.cogixgrid th {
+    border-width: 1px 0px 0px 1px;
+    padding: 1px 2px 1px 2px;
+    border-style: inset inset inset inset;
+    border-color: gray gray gray gray;
+}
+table.cogixgrid td {
+    border-width: 1px 0px 0px 1px;
+    padding: 1px 2px 1px 2px;
+    border-style: inset inset inset inset;
+    border-color: gray gray gray gray;
+}
+tr.cogixgrid1 ,td.cogixgrid1 {
+    background-color:#CCCCCC;
+    font-weight:bolder;
+}
+tr.cogixgrid2, td.cogixgrid2 {
+    font-style:italic;
+    font-weight:lighter;
+}
+tr.cogixgrid3, td.cogixgrid3  {
+    color:#FFFFFF;
+    background-color:#333333;
+    font-weight:bolder;
+}
+a.cogixgridmore:active,a.cogixgridmore:link, a.cogixgridmore:visited {
+text-decoration:none; ;
+}
+div.cogixgridmore {
+height:25px;
+padding:5px 0px 0px 10px;
+}
+
+.CogixCalendarcpCalendaLayer { position: absolute; visibility: hidden; background-color: white; }
+.CogixCalendarcpYearNavigation, .CogixCalendarcpMonthNavigation { background-color: #6677DD; text-align: center; text-decoration: none; color: #FFFFFF; font-weight: bold; }
+.CogixCalendarcpDayColumnHeader, .CogixCalendarcpYearNavigation, .CogixCalendarcpMonthNavigation, .CogixCalendarcpCurrentMonthDate, .CogixCalendarcpCurrentMonthDateDisabled, .CogixCalendarcpOtherMonthDate, .CogixCalendarcpOtherMonthDateDisabled,
+.CogixCalendarcpCurrentDate, .CogixCalendarcpCurrentDateDisabled, .CogixCalendarcpTodayText, .CogixCalendarcpTodayTextDisabled, .CogixCalendarcpText { font-family: arial, sans-serif; font-size: 8pt; }
+TD.CogixCalendarcpDayColumnHeader { text-align: right; border: solid thin #6677DD; border-width: 0 0 1px 0; }
+.CogixCalendarcpCurrentMonthDate, .CogixCalendarcpOtherMonthDate, .CogixCalendarcpCurrentDate { text-align: right; text-decoration: none; }
+.CogixCalendarcpCurrentMonthDateDisabled, .CogixCalendarcpOtherMonthDateDisabled, .CogixCalendarcpCurrentDateDisabled { color: #D0D0D0; text-align: right; text-decoration: line-through; }
+.CogixCalendarcpCurrentMonthDate { color: #6677DD; font-weight: bold; }
+.CogixCalendarcpCurrentDate { color: #FFFFFF; font-weight: bold; }
+.CogixCalendarcpOtherMonthDate { color: #808080; }
+TD.CogixCalendarcpCurrentDate { color: #FFFFFF; background-color: #6677DD; border-width: 1px; border: solid thin #000000; }
+TD.CogixCalendarcpCurrentDateDisabled { border-width: 1px; border: solid thin #FFAAAA; }
+TD.CogixCalendarcpTodayText, TD.CogixCalendarcpTodayTextDisabled { border: solid thin #6677DD; border-width: 1px 0 0 0; }
+A.CogixCalendarcpTodayText, SPAN.CogixCalendarcpTodayTextDisabled { height: 20px; }
+A.CogixCalendarcpTodayText { color: #6677DD; font-weight: bold; }
+SPAN.CogixCalendarcpTodayTextDisabled { color: #D0D0D0; }
+.CogixCalendarcpBorder { border: solid thin #6677DD; }
+.cogix-form-button {
+    background-color: #eeffff !important;
+    border:1px solid grey;
+    border-radius:5px;
+    font-size:.95em;
+    line-height:110%;
+    letter-spacing:.05em;
+    color: black;
+
+}
+.cogix-form-button:focus {
+}
+.cogix-form-button:active,
+.cogix-form-button:hover{
+    box-shadow: inset 0 0 0 1px #27496d,0 5px 10px #193047;
+}
+.cogixformsubmitted {
+    color:#777777 !important;
+    background:#eeeeee !important;
+    background: url('../images/spinner.gif') no-repeat center !important;
+}
+.cogixformsubmitted:active,
+.cogixformsubmitted:hover {
+    box-shadow:none !important;
+    background: url('../images/spinner.gif') no-repeat center !important;
+    outline:none;
+}
+.cogix-submitbuttons { float:right; margin:0 0 0 2px;}
+.cogix-progress-footprints {clear:both; padding-top:5px; }
+.cogix-disable {background-color: #DDDDDD !important; font-style: italic; }
+.cogix-section-body input[disabled] { background: #dddddd; border-color: #eeeeee !important; }
+.cogix-section-body input[type="checkbox"] {margin-bottom:0 !important; }
+textarea.cogix-form-input-field  { width:auto; height:auto;}
+input[type="text"].cogix-form-input-field  { width:auto;}
+

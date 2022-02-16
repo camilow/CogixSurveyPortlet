@@ -1,0 +1,29 @@
+/* Contains differences from Standard_.css needed for Liferay 7 */
+table.matrix th {
+    word-break:normal;
+}
+
+table.matrix td {
+     word-break:normal;
+}
+
+.cogix-form-button:focus {
+    background-color:#eeffff !important;
+    font-weight:bold;
+    outline:none;
+}
+
+.cogix-form-button:hover{
+    font-weight:bold;
+    box-shadow:none;
+}
+
+.cogixformsubmitted {
+    color:#777777 !important;
+    background:#eeeeee !important;
+}
+
+.cogixformsubmitted:active,
+.cogixformsubmitted:hover {
+    box-shadow: inset 0 0 0 1px #27496d,0 5px 10px #193047;
+}

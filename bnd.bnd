@@ -1,0 +1,9 @@
+Bundle-Name: ViewsFlash
+Bundle-SymbolicName: ViewsFlash
+Bundle-Version: 1.0.7
+Web-ContextPath: /ViewsFlash_WCP
+-metatype: *
+
+Import-Package:\
+  com.liferay.portal.kernel;version="latest.release",\
+  *
