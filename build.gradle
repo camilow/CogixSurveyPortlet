@@ -14,6 +14,10 @@ buildscript {
 
 apply plugin: "com.liferay.plugin"
 
+/* can't find "workspace"
+liferay.workspace.target.platform.version=7.4
+*/
+
 dependencies {
 	/* neither 3.0 nor 4.0 work with 7.4.2 */
 /* for 7.0:	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.0.0" */
@@ -25,9 +29,32 @@ dependencies {
 
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.4.2-ga3"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "7.4.2-ga3"
- */
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
 
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.0.0"
+	fails with classnotfound LiferayPortlet
+
+	same thing for version 37":
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "37.0.0"
+
+    This gives unresolved gradle in repositiory for release.portal.api"
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+
+	This works but runtime behaving weird ( init / config / properties is null )
+	I think it puts all the modules in MY jar, yup, 6.6M instead of 99K:
+	compileInclude group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "37.0.0"
+
+	compile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "37.0.0"
+
+	Gives unreseolved on User:
+		compile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
+	3.0 gives unresolvedon portal.kernel.exception
+	2.0 same thing
+	37 gives unresolved portal.kernel.model so does 3.18.4
+
+
+ */
+	compile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "37.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "2.0.0"
 
 	compileOnly group: "javax.portlet", name: "portlet-api", version: "2.0"

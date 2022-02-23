@@ -247,10 +247,14 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/biz.aQute.bnd/biz.aQute.bndlib/3.1.0/58ab3de3dac4f7cfd835a711158d8ef7dfa2b872/biz.aQute.bndlib-3.1.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: com.liferay.portal:com.liferay.portal.kernel:7.4.2-ga3">
-      <CLASSES />
+    <library name="Gradle: com.liferay.portal:com.liferay.portal.kernel:37.0.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/com.liferay.portal.kernel/37.0.0/d8931583c2c03b105847abe0913ebe50f733428/com.liferay.portal.kernel-37.0.0.jar!/" />
+      </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay.portal/com.liferay.portal.kernel/37.0.0/fe4ee321ae6c269202d7859e652d38a81de6a273/com.liferay.portal.kernel-37.0.0-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: com.liferay.portal:com.liferay.util.taglib:2.0.0">
       <CLASSES>

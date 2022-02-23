@@ -3,7 +3,6 @@ package com.cogix;
 
 import aQute.bnd.annotation.metatype.Configurable;
 import com.cogix.vwf.Belize;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -85,7 +84,10 @@ public class SurveyPortlet extends LiferayPortlet {
     @Override
     public void init() throws PortletException {
         super.init ();
-        String phrase = PropsUtil.get("com.cogix.surveyportlet.adage");
+        String phrase = null;
+        if ( PropsUtil.getProps () != null ) {
+            phrase = PropsUtil.get ( "com.cogix.surveyportlet.adage" );
+        }
         if ( phrase == null )
             phrase = System.getenv ("com_cogix_surveyportlet_adage");
         belize = Belize.Get (phrase);
@@ -140,7 +142,7 @@ public class SurveyPortlet extends LiferayPortlet {
         try {
             userobj = getUser(renderRequest); // getScreenName gives name
             userid = Utility.getUserName ( userobj );
-        } catch ( PortalException e ) {
+        } catch ( Exception e ) {
             userid=e.toString ();
         }
 

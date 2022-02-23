@@ -2,7 +2,6 @@ package com.cogix;
 
 import aQute.bnd.annotation.metatype.Configurable;
 import com.cogix.vwf.Belize;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
@@ -44,6 +43,7 @@ import static com.liferay.portal.kernel.util.PortalUtil.getUser;
 )
 public class SurveyConfigurationAction extends DefaultConfigurationAction {
     private volatile Configuration _configuration;
+    static private final String version="0";
 
     @Reference
     private ConfigurationProvider _configurationProvider;
@@ -106,8 +106,8 @@ public class SurveyConfigurationAction extends DefaultConfigurationAction {
             String encrypteduseridandroles = SurveyPortlet.belize.encrypt ( encrypted ); //userid|role,role,role
             encrypteduseridandroles = URLEncoder.encode(encrypteduseridandroles, "UTF-8");
             return encrypteduseridandroles;
-        } catch (Throwable ignore) {
-            return ignore.toString ();
+        } catch (Throwable th) {
+            return th.toString ();
         }
     }
 
@@ -130,7 +130,7 @@ public class SurveyConfigurationAction extends DefaultConfigurationAction {
         try {
             userobj = getUser(httpServletRequest); // getScreenName gives name
             userid = Utility.getUserName ( userobj );
-        } catch ( PortalException e ) {
+        } catch ( Exception e ) {
             userid=e.toString ();
         }
 

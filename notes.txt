@@ -7,10 +7,12 @@ Note that project on mini uses portal-kernel 3.0,
 m1 uses portal-kernel 4.0, and this should be reflected
 in different MANIFESTS inside their jars
 
-  com.liferay.portal.kernel;version="[3.0.0,*)",\
-  com.liferay.portal.kernel;version="latest.release",\
-  com.liferay.portal.kernel;version="[3.0.0",\
+experimenting with bnd.bnd:
+  com.liferay.portal.kernel;version="[2.0.0,*)",\  NG invalid format.
++  com.liferay.portal.kernel;version="latest.release",\  NG must be numeric
+  com.liferay.portal.kernel;version="[2.0.0",\ NG invalid format
   com.liferay.portal.kernel;version="default",\
+  com.liferay.portal.kernel;version="2.0.0",\
 
 
 So build process:
