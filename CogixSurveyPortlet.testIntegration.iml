@@ -7,5 +7,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CogixSurveyPortlet.main" />
+    <orderEntry type="library" name="Gradle: com.liferay.portal:com.liferay.portal.kernel:37.0.0" level="project" />
   </component>
 </module>

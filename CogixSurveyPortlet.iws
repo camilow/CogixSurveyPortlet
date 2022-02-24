@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abf88904-f0c0-44a8-be1a-47639c0637fa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CogixSurveyPortlet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CogixSurveyPortlet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.ipr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/resources/images/spinner.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/resources/images/viewer.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.iws" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bnd.bnd" beforeDir="false" afterPath="$PROJECT_DIR$/bnd.bnd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.property" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.testIntegration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.testIntegration.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/cogix/SurveyPortlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/cogix/SurveyPortlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cogix/SurveyConfigurationAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cogix/SurveyConfigurationAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cogix/SurveyPortlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cogix/SurveyPortlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,12 +146,15 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -166,7 +164,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="HSQLDB (Local)" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/META-INF/resources/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -182,11 +180,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/META-INF/resources/images" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/bin" />
       <recent name="$PROJECT_DIR$/src/main/resources/META-INF/resources" />
       <recent name="$PROJECT_DIR$/libs" />
-      <recent name="$PROJECT_DIR$/src/main/resources/META-INF/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/unusedlibs" />
@@ -396,7 +394,8 @@
       <workItem from="1644977792485" duration="6350000" />
       <workItem from="1644984162990" duration="1650000" />
       <workItem from="1644985830071" duration="2202000" />
-      <workItem from="1645571246643" duration="8884000" />
+      <workItem from="1645571246643" duration="9054000" />
+      <workItem from="1645654926130" duration="9277000" />
     </task>
     <task id="LOCAL-00001" summary="in flux">
       <created>1644988022112</created>
@@ -405,15 +404,24 @@
       <option name="project" value="LOCAL" />
       <updated>1644988022112</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="liferay 7.4 loads portlet first time!">
+      <created>1645581888559</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1645581888559</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="in flux" />
-    <option name="LAST_COMMIT_MESSAGE" value="in flux" />
+    <MESSAGE value="liferay 7.4 loads portlet first time!" />
+    <option name="LAST_COMMIT_MESSAGE" value="liferay 7.4 loads portlet first time!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
