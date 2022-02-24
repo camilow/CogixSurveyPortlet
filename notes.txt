@@ -1,11 +1,7 @@
-To ed palmer, chicago
-We were recently testing ViewsFlash 10 with Liferay 7.4,
-and sure enough the war file that works with Liferay 7.1
-no longer works because of changed portlet.kernel jar f
-iles and the new version controls in Liferay.
-Note that project on mini uses portal-kernel 3.0,
-m1 uses portal-kernel 4.0, and this should be reflected
-in different MANIFESTS inside their jars
+Previous liferay7 portlet, before 2020,
+used dependencies; this re-do uses resolution:=optional,
+which takes Care of thos problems
+
 
 experimenting with bnd.bnd:
   com.liferay.portal.kernel;version="[2.0.0,*)",\  NG invalid format.
@@ -16,14 +12,11 @@ experimenting with bnd.bnd:
 GRAND SOLUTION in bnd.bnd: Import-Package: *; version="0";resolution:=optional
 
 TODO:
-- added images/spinner.gif, will it make it?
-  probably not ,but it doesn't matter, may be best to remove fro mStandard_css
-- how to get the latest js files into here; note the weird names;
-  different from m1 VIewsFlash build; and how to copy them here?
 - ie what is the role of VF10 build xml and liferay in general ???
    - resources metainf resources come from standard viewsflash build
    - originial VF's l7portlet copies the css and js files from ViewFlash
      project to META-INF.resources  TODO where? Perhaps in ViewsFlash.war build?
+
    - liferay 7 build, changes to the war file:
      - hmmm. there are 2 lry.jsp - one in resources, onein war file
      - there is a different web.xml, copied from webliferay7.xml
@@ -71,8 +64,11 @@ ViewsFlash:
 
   - new Liferay 7 artifact to combine ( which built ViewsFlash.war ? )
     and this .jar file into Liferay7.war, can be renamed zip?
-    - OK, only remainig todo is to get 5and6  artifact to combine
-      168 + ViewsFlash exploded
+    - todo is to get 5and6  artifact to combine
+      + 168 + ViewsFlash exploded
+
+
+
     - Then work on liferay7zip artifact;
       needs webliferay7.xml ( or should it use viewsflash's )?
       and vf.jar from this project and that's it.
@@ -80,6 +76,11 @@ ViewsFlash:
       Liferay5and6.war, this guy, Liferay7.war/zip
       A rename after the build would probably do it
 
+      Possible bug about continue link being present too often
+      See surveycontent. 799
+
+
+SurveyConfigLiferay.jsp is very very different
 
 
 

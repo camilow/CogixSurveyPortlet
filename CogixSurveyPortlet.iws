@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abf88904-f0c0-44a8-be1a-47639c0637fa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/resources/images/spinner.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/resources/images/viewer.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.iws" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.testIntegration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.testIntegration.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -395,7 +390,9 @@
       <workItem from="1644984162990" duration="1650000" />
       <workItem from="1644985830071" duration="2202000" />
       <workItem from="1645571246643" duration="9054000" />
-      <workItem from="1645654926130" duration="9277000" />
+      <workItem from="1645654926130" duration="9566000" />
+      <workItem from="1645729655505" duration="1994000" />
+      <workItem from="1645740801392" duration="1984000" />
     </task>
     <task id="LOCAL-00001" summary="in flux">
       <created>1644988022112</created>
@@ -411,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645581888559</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="liferay 7.4 portlet works">
+      <created>1645671380527</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1645671380527</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +425,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="in flux" />
     <MESSAGE value="liferay 7.4 loads portlet first time!" />
-    <option name="LAST_COMMIT_MESSAGE" value="liferay 7.4 loads portlet first time!" />
+    <MESSAGE value="liferay 7.4 portlet works" />
+    <option name="LAST_COMMIT_MESSAGE" value="liferay 7.4 portlet works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
