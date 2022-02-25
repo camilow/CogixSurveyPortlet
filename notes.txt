@@ -13,12 +13,11 @@ GRAND SOLUTION in bnd.bnd: Import-Package: *; version="0";resolution:=optional
 
 TODO:
 - ie what is the role of VF10 build xml and liferay in general ???
-   - resources metainf resources come from standard viewsflash build
-   - originial VF's l7portlet copies the css and js files from ViewFlash
+   + resources metainf resources come from standard viewsflash build
+   + originial VF's l7portlet copies the css and js files from ViewFlash
      project to META-INF.resources  TODO where? Perhaps in ViewsFlash.war build?
 
    - liferay 7 build, changes to the war file:
-     - hmmm. there are 2 lry.jsp - one in resources, onein war file
      - there is a different web.xml, copied from webliferay7.xml
      - ISO.log:
           [copy] Copying 1 file to /Users/camilowilson/VF/  VF6/60/VF/release/newliferay7
@@ -70,7 +69,60 @@ ViewsFlash:
 
 
     - Then work on liferay7zip artifact;
-      needs webliferay7.xml ( or should it use viewsflash's )?
+      Combines plain war file plus vf.jar from this project:
+      expands plain war file,
+      copies lry.jsp
+      copies webliferay7.xml ( has no authentication in it ! )
+      packs into a ViewsFlash.war file
+      zips ViewsFlash.war, ViewsFlash-*.jar, readme.txt
+      So: new build is project Liferay7,
+        includes plain war file stuff,
+        has lry.jsp in it ( or perhaps in base war file ?)
+        has web.xml formerly webliferay7.xml
+        builds VF.war
+        post processing copies jar file and readme.txt from this project
+        and zips into ViewsFlash.zip
+        So: 1st step is simple build into wexpanded liferay7
+
+
+
+          <target name="liferay7war" >
+
+              <property name="l7dest" value="../release/newliferay7"/>
+              <mkdir dir="${l7dest}/WEB-INF/classes/com/cogix/vwf"/>
+              <delete includeemptydirs="true">
+                  <fileset dir="${l7dest}" />
+              </delete>
+              <!-- expand vf war
+               -->
+              <unzip src="${wardest}/ViewsFlash.war" dest="${l7dest}" />
+
+              <record name="/Users/camilowilson/ISO.log" loglevel="verbose"/>
+              <copy todir="${l7dest}" overwrite="true"  preservelastmodified="true">
+                  <fileset file="${warsrc}/lry.jsp" />
+              </copy>
+              <copy  overwrite="true" file="${warsrc}/WEB-INF/webliferay7.xml" tofile="${l7dest}/WEB-INF/web.xml"  preservelastmodified="true" />
+              <record name="/Users/camilowilson/ISO.log" action="stop" />
+              <jar basedir="${l7dest}" destfile="${l7dest}/ViewsFlash.war" excludes="ViewsFlash.war"  />
+
+              <!-- create zip with war, portlet and readme -->
+
+              <record name="ISO.log" loglevel="verbose"/>
+
+              <input message="Using ViewsFlash-1.0.7.jar in portlet property below, make sure it's the latest version. Press enter to continue."    />
+
+              <property name="portlet" value="/Users/camilowilson/liferay7/arena/CogixSurveyPortlet/build/libs/ViewsFlash-1.0.7.jar" />
+              <copy file="${portlet}" todir="${l7dest}" />
+
+              <copy file="${warsrc}/liferay7/readme.txt" todir="${l7dest}" overwrite="true" />
+              <zip
+                      destfile="${l7dest}/ViewsFlash.zip"
+                      basedir="${l7dest}"
+                      includes="ViewsFlash.war ViewsFlash-*.jar readme.txt"
+              />
+
+          </target>
+
       and vf.jar from this project and that's it.
       So overall build sequence is main ViewsFlash, ViewsFlash.war,
       Liferay5and6.war, this guy, Liferay7.war/zip

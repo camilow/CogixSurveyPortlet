@@ -16,5 +16,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: jstl:jstl:1.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.osgi:osgi.cmpn:6.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: biz.aQute.bnd:biz.aQute.bndlib:3.1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="servlet-api" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="portal-kernel" level="project" />
   </component>
 </module>
