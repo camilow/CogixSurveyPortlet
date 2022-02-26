@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abf88904-f0c0-44a8-be1a-47639c0637fa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.iws" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CogixSurveyPortlet.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CogixSurveyPortlet.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/resources/lry.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -396,7 +393,8 @@
       <workItem from="1645654926130" duration="9566000" />
       <workItem from="1645729655505" duration="1994000" />
       <workItem from="1645740801392" duration="2070000" />
-      <workItem from="1645817089179" duration="7869000" />
+      <workItem from="1645817089179" duration="8086000" />
+      <workItem from="1645909278451" duration="1026000" />
     </task>
     <task id="LOCAL-00001" summary="in flux">
       <created>1644988022112</created>
@@ -426,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645742806568</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="liferay 7.4 portlet works">
+      <created>1645831118883</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1645831118883</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
